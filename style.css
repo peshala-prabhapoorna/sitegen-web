@@ -88,6 +88,12 @@
     flex: 1 1 auto;
 }
 
+.preview {
+    flex: 1 1 auto;
+    list-style-position: inside;
+    background-color: white;
+}
+
 #preview-placeholder {
     flex: 1 1 auto;
     display: flex;
