@@ -1,8 +1,32 @@
-async function main() {
-    // disable convert button until Pyodide has loaded
-    const convertButton = document.querySelector('#convert');
-    convertButton.disabled = true;
+// disable preview toggle until conversion
+const previewToggle = document.querySelector('#toggle-preview');
+previewToggle.disabled = true;
+// disable convert button until Pyodide has loaded
+const convertButton = document.querySelector('#convert');
+convertButton.disabled = true;
 
+let htmlSite;
+let articleElement;
+const htmlCodeElement = document.createElement('textarea');
+htmlCodeElement.classList.add('code');
+htmlCodeElement.readOnly = true;
+
+doThingsWithPyodide();
+
+previewToggle.addEventListener('click', () => {
+    if (previewToggle.textContent === 'HTML') {
+        htmlCodeElement.value = htmlSite;
+        appendChildToHtmlWorkspace(htmlCodeElement);
+
+        previewToggle.textContent = 'Preview';
+    } else {
+        appendChildToHtmlWorkspace(articleElement);
+
+        previewToggle.textContent = 'HTML';
+    }
+});
+
+async function doThingsWithPyodide() {
     // load Pyodide, micropip and install sitegen
     const pyodide = await loadPyodide();
     await pyodide.loadPackage('micropip');
@@ -15,6 +39,7 @@ async function main() {
     from sitegen import sitegen
     print("Imported sitegen")
     `);
+    // finish loading Python related packages
 
     convertButton.disabled = false;
 
@@ -25,19 +50,25 @@ async function main() {
         markdown = document.querySelector('#md-code').value
         html_site = sitegen.generate(markdown)
         `);
-        const htmlSite = pyodide.globals.get('html_site');
+        htmlSite = pyodide.globals.get('html_site');
 
         // extract only the body from the html document
         const parser = new DOMParser();
         const parsedHtmlSite = parser.parseFromString(htmlSite, 'text/html');
-        const articleElement = parsedHtmlSite.querySelector('article');
+        articleElement = parsedHtmlSite.querySelector('article');
         articleElement.classList.add('preview');
 
-        const htmlWorkspaceElement = document.querySelector('#html-workspace');
-        htmlWorkspaceElement.removeChild(
-            htmlWorkspaceElement.firstElementChild
-        );
-        htmlWorkspaceElement.appendChild(articleElement);
+        appendChildToHtmlWorkspace(articleElement);
+        previewToggle.textContent = 'HTML';
+
+        previewToggle.disabled = false;
     });
 }
-main()
+
+function appendChildToHtmlWorkspace(child) {
+    const htmlWorkspaceElement = document.querySelector('#html-workspace');
+    htmlWorkspaceElement.removeChild(
+        htmlWorkspaceElement.firstElementChild
+    );
+    htmlWorkspaceElement.appendChild(child);
+}
