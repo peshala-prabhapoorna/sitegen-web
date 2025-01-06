@@ -71,7 +71,19 @@
 }
 
 .workspace {
-    border: 1px solid white;
+    border: 1px solid #636363;
     border-radius: 8px;
+    flex: 1 1 auto;
+    display: flex;
+    max-width: 50%;
+}
+
+.code {
+    border-radius: 8px;
+    border: none;
+    padding: 8px;
+    color: #d4d4d4;
+    background-color: #262626;
+    font-size: 15px;
     flex: 1 1 auto;
 }
