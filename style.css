@@ -68,6 +68,7 @@
     background-color: #202225;
     display: flex;
     gap: 16px;
+    min-height: 0px;
 }
 
 .workspace {
@@ -96,6 +97,7 @@
     border: none;
     border-radius: 8px;
     padding: 16px;
+    overflow: auto;
 }
 
 #preview-placeholder {
