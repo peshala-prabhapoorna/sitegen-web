@@ -32,7 +32,7 @@ async function doThingsWithPyodide() {
     await pyodide.loadPackage('micropip');
     const micropip = pyodide.pyimport('micropip');
     await micropip.install(
-        'http://127.0.0.1:8080/assets/sitegen-1.0.0-py3-none-any.whl'
+        'http://127.0.0.1:8080/assets/sitegen-1.0.1-py3-none-any.whl'
     );
 
     await pyodide.runPython(`
