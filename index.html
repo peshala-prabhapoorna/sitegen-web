@@ -17,7 +17,18 @@
                     <button id="guide" class="pane-button">Guide</button>
                     <button id="history" class="pane-button">History</button>
                     <button id="reset" class="pane-button">Reset</button>
-                    <button id="upload" class="pane-button">Upload</button>
+                    <input
+                        id="invisible-upload"
+                        type="file"
+                        accept=".md, .markdown"
+                        style="display: none;">
+                    <input
+                        id="upload"
+                        class="pane-button"
+                        type="button"
+                        value="Upload"
+                        onclick=
+                        "document.querySelector('#invisible-upload').click();">
                     <button id="convert" class="pane-button">Convert</button>
                 </div>
             </div>
@@ -70,6 +81,7 @@ func main(){
             </div>
         </div>
     </div>
+    <script src="uploadFile.js"></script>
     <script src="http://127.0.0.1:8080/assets/pyodide.js"></script>
     <script src="script.js"></script>
     </body>
