@@ -1,3 +1,12 @@
+const resetButton = document.querySelector('#reset');
+
+resetButton.addEventListener('click', () => {
+    const mdCode = document.querySelector('#md-code');
+    mdCode.value = '# TITLE\n\nParagraph goes here!';
+    const convertButton = document.querySelector('#convert');
+    convertButton.click();
+});
+
 const uploadInputElement = document.querySelector('#invisible-upload');
 
 uploadInputElement.addEventListener('change', () => {
