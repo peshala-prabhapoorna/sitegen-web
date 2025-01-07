@@ -4,6 +4,9 @@ previewToggle.disabled = true;
 // disable convert button until Pyodide has loaded
 const convertButton = document.querySelector('#convert');
 convertButton.disabled = true;
+// disable download button until conversion
+const downloadButton = document.querySelector('#download');
+downloadButton.disabled = true;
 
 let htmlSite;
 let articleElement;
@@ -24,6 +27,28 @@ previewToggle.addEventListener('click', () => {
 
         previewToggle.textContent = 'HTML';
     }
+});
+
+downloadButton.addEventListener('click', () => {
+    let title = articleElement.querySelector('h1').textContent;
+    title = title
+        .trim()
+        .replaceAll(/[^a-zA-Z\d\-_\. ]/g, '')
+        .replaceAll(' ', '-')
+        .toLowerCase();
+    const htmlFileName =  `${title}.html`;
+
+    const htmlFile = new File([htmlSite], htmlFileName, {type: 'text/html'});
+    const htmlFileURL = URL.createObjectURL(htmlFile);
+
+    const link = document.createElement('a');
+    link.href = htmlFileURL;
+    link.download = htmlFileName;
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(htmlFileURL);
 });
 
 async function doThingsWithPyodide() {
@@ -62,6 +87,7 @@ async function doThingsWithPyodide() {
         previewToggle.textContent = 'HTML';
 
         previewToggle.disabled = false;
+        downloadButton.disabled = false;
     });
 }
 
