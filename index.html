@@ -6,6 +6,7 @@
         <title>SiteGen</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="scroll-bar.css">
+        <link rel="stylesheet" href="history-dropdown.css">
     </head>
     <body>
     <div id="viewport">
@@ -16,7 +17,14 @@
                 </div>
                 <div id="md-buttons" class="pane-buttons">
                     <button id="guide" class="pane-button">Guide</button>
-                    <button id="history" class="pane-button">History</button>
+                    <div id="history-dropdown" class="pane-button">
+                        <button id="history-btn" class="pane-button">
+                            History
+                        </button>
+                        <div id="history-bridge-hover">
+                            <div id="history-content"></div>
+                        </div>
+                    </div>
                     <button id="reset" class="pane-button">Reset</button>
                     <input
                         id="invisible-upload"

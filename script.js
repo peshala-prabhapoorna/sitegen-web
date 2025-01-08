@@ -1,3 +1,7 @@
+const MAX_HISTORY_ITEMS = 5;
+
+const historyContent = document.querySelector('#history-content');
+const mdCodeElement = document.querySelector('#md-code');
 // disable preview toggle until conversion
 const previewToggle = document.querySelector('#toggle-preview');
 previewToggle.disabled = true;
@@ -68,7 +72,13 @@ async function doThingsWithPyodide() {
 
     convertButton.disabled = false;
 
-    convertButton.addEventListener('click', async () => {
+    convertButton.addEventListener('click', async (event) => {
+        // if this conversion isn't the same as the last go ahead
+        if (
+            historyContent.children.length !== 0 &&
+            mdCodeElement.value === historyContent.firstChild.value
+        ) return;
+
         // convert markdown to html
         await pyodide.runPython(`
         from js import document
@@ -86,8 +96,31 @@ async function doThingsWithPyodide() {
         appendChildToHtmlWorkspace(articleElement);
         previewToggle.textContent = 'HTML';
 
+        // To exclude conversions from reset button clicks
+        if (event.isTrusted) {
+            updateHistory();
+        }
+
         previewToggle.disabled = false;
         downloadButton.disabled = false;
+    });
+}
+
+function updateHistory() {
+    while (historyContent.children.length >= MAX_HISTORY_ITEMS) {
+        historyContent.removeChild(historyContent.lastChild);
+    }
+
+    const historyItem = document.createElement('textarea');
+    historyItem.classList.add('history-item');
+    historyItem.readOnly = true;
+    historyItem.value = mdCodeElement.value;
+    historyContent.prepend(historyItem);
+
+    historyItem.addEventListener('click', () => {
+        mdCodeElement.value = historyItem.value;
+        const convertButton = document.querySelector('#convert');
+        convertButton.click();
     });
 }
 
