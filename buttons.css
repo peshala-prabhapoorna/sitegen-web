@@ -1,0 +1,32 @@
+.pane-button {
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 16px;
+    color: white;
+    background-color: #5a6268;
+}
+
+#convert,
+#download {
+    background-color: #218838;
+}
+
+#guidebtn {
+    background-color: #0069d9;
+}
+
+#guide-ok-btn {
+    border: 1px solid #b4b4b4;
+    border-radius: 8px;
+    color: white;
+    background-color: #218838;
+    padding: 8px 16px;
+    font-size: 20px;
+}
+
+#guide-ok-btn:hover,
+.pane-button:hover {
+    filter: brightness(85%);
+    transition: 0.2s;
+}
