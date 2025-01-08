@@ -61,7 +61,7 @@ async function doThingsWithPyodide() {
     await pyodide.loadPackage('micropip');
     const micropip = pyodide.pyimport('micropip');
     await micropip.install(
-        'http://127.0.0.1:8080/assets/sitegen-1.0.1-py3-none-any.whl'
+        'http://127.0.0.1:8080/assets/packages/sitegen-1.0.1-py3-none-any.whl'
     );
 
     await pyodide.runPython(`
@@ -73,12 +73,6 @@ async function doThingsWithPyodide() {
     convertButton.disabled = false;
 
     convertButton.addEventListener('click', async (event) => {
-        // if this conversion isn't the same as the last go ahead
-        if (
-            historyContent.children.length !== 0 &&
-            mdCodeElement.value === historyContent.firstChild.value
-        ) return;
-
         // convert markdown to html
         await pyodide.runPython(`
         from js import document
@@ -107,6 +101,12 @@ async function doThingsWithPyodide() {
 }
 
 function updateHistory() {
+    // if this conversion isn't the same as the last go ahead
+    if (
+        historyContent.children.length !== 0 &&
+        mdCodeElement.value === historyContent.firstChild.value
+    ) return;
+
     while (historyContent.children.length >= MAX_HISTORY_ITEMS) {
         historyContent.removeChild(historyContent.lastChild);
     }
