@@ -1,0 +1,34 @@
+.preview * {
+    margin: 2px;
+    padding: 2px;
+    box-sizing: content-box;
+
+}
+
+.preview h1 {
+    font-size: 28px;
+    margin: 4px;
+}
+
+.preview blockquote { 
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 4px;
+}
+
+.preview code {
+    font-family: Consolas,"courier new";
+    color: crimson;
+    padding: 4px;
+}
+
+.preview pre {
+    margin: 4px;
+    padding: 2px;
+    background-color: #f0f0f0;
+}
