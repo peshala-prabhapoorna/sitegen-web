@@ -61,7 +61,7 @@ async function doThingsWithPyodide() {
     await pyodide.loadPackage('micropip');
     const micropip = pyodide.pyimport('micropip');
     await micropip.install(
-        'http://127.0.0.1:8080/assets/packages/sitegen-1.0.1-py3-none-any.whl'
+        'https://sitegen.lavenderleit.dev/assets/packages/sitegen-1.0.1-py3-none-any.whl'
     );
 
     await pyodide.runPython(`
