@@ -15,7 +15,7 @@
 }
 
 #header {
-    flex: 1 1 auto;
+    flex: 1 0 0;
     max-height: 48px;
     display: flex;
     gap: 4px;
@@ -57,7 +57,7 @@
 }
 
 #workspace-container {
-    flex: 1 1 auto;
+    flex: 1 0 0;
     background-color: #202225;
     display: flex;
     gap: 16px;
@@ -67,7 +67,7 @@
 .workspace {
     border: 1px solid #636363;
     border-radius: 8px;
-    flex: 1 1 auto;
+    flex: 1 0 0;
     display: flex;
     max-width: 50%;
 }
