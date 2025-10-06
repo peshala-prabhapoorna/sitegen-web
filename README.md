@@ -18,6 +18,40 @@ Live: [SiteGen](https://sitegen.lavenderleit.dev/)
 
 The web UI is build with basic web development tools: HTML, CSS, JavaScript. SiteGen Python package ([peshala-prabhapoorna/sitegen-app](https://github.com/peshala-prabhapoorna/sitegen-app/releases/latest)) is used locally in the client browser to convert Markdown HTML. Pyodide is used to run Python in the broswer on the WebAssembly VM.
 
+## Build Instructions
+
+To build the project, run the following commands:
+
+### Build and Run with Docker
+
+Build the Docker image:
+
+```bash
+docker build -t sitegen-web:latest .
+```
+
+Run the container:
+
+```bash
+docker run -d -p 8080:80 --name sitegen-web sitegen-web
+```
+
+The application will be available at `http://localhost:8080`.
+
+### Using Docker Compose
+
+Start the application:
+
+```bash
+docker compose up -d
+```
+
+Stop the application:
+
+```bash
+docker compose down
+```
+
 ## License
 
 This project is licensed under the MIT License.
